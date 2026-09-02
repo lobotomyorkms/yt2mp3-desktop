@@ -1,4 +1,4 @@
-# YouTube to MP3 - Desktop App
+# YouTube to MP3 - Desktop App (Linux - Debian)
 
 A simple Liunx desktop app built with Python and Tkinter that downloads a YouTube
 video and converts it to MP3, using yt-dlp.
