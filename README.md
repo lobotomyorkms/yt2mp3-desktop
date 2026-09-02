@@ -1,6 +1,6 @@
-# YouTube to MP3 - Desktop App (Linux - Debian)
+# YouTube to MP3 - Desktop App for Windows & Linux (Debian)
 
-A simple Liunx desktop app built with Python and Tkinter that downloads a YouTube
+A simple desktop app built with Python and Tkinter that downloads a YouTube
 video and converts it to MP3, using yt-dlp.
 
 ## Requirements
@@ -24,14 +24,38 @@ chmod +x install.sh
 ./install.sh
 ```
 
+## Quick install (Windows)
+
+Double-click `install.bat` (or run it from a terminal). If you're on Windows
+10/11, it will try to install Python and ffmpeg automatically using
+**winget** (Windows' built-in package manager) if they're missing.
+
+Because Windows only refreshes the PATH environment variable in new
+terminal sessions, if the script had to install Python or ffmpeg for you,
+it will ask you to close the window and run `install.bat` again — that
+second run will find them and continue normally.
+
+If `winget` isn't available on your system (uncommon, but possible on
+older Windows versions), the script will fall back to showing you where to
+download Python and ffmpeg manually:
+
+- Python: https://www.python.org/downloads/ — check **"Add python.exe to
+  PATH"** during setup.
+- ffmpeg: https://ffmpeg.org/download.html (or
+  https://www.gyan.dev/ffmpeg/builds/ for prebuilt Windows binaries) —
+  unzip it and add its `bin` folder to your PATH environment variable.
+
+Once dependencies are in place, the script builds `app_desktop.exe` and
+adds a shortcut to your Desktop.
+
 ## Manual install
 
 ## Install
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate
-pip install yt-dlp
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ## Run
@@ -61,7 +85,8 @@ pip install pyinstaller
 pyinstaller --onefile --windowed app_desktop.py
 ```
 
-The executable will be at `dist/app_desktop`. Note that:
+The executable will be at `dist/app_desktop` (or `dist\app_desktop.exe` on
+Windows). Note that:
 
 - `ffmpeg` is **not** bundled — it still needs to be installed separately on
   the machine running the app.
