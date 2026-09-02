@@ -50,7 +50,7 @@ if errorlevel 1 (
         echo.
         echo ==^> ffmpeg was installed, but this terminal session won't see it until you
         echo     open a new one. MP3 conversion won't work until you restart the terminal
-        echo     (or your PC) before running the app.
+        echo     ^(or your PC^) before running the app.
         echo.
     )
 )
