@@ -42,7 +42,7 @@ It will try to install Python and ffmpeg automatically using
 
 ## Install
 
-`ffmpeg` is **not** bundled — it still needs to be installed separately on
+`ffmpeg` is **not** bundled - it still needs to be installed separately on
   the machine running the app:
 
 - Linux: `sudo apt install ffmpeg`
