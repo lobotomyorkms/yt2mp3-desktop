@@ -18,6 +18,7 @@ def download_audio(url):
             "preferredcodec": "mp3",
             "preferredquality": "320",
         }],
+        "noplaylist": True,
         "quiet": True,
     }
 

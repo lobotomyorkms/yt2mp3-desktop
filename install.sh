@@ -1,18 +1,13 @@
 #!/bin/bash
 set -e
 
-# install.sh - installs and packages the YouTube to MP3 desktop app
-#
-# Usage:
-#   chmod +x install.sh
-#   ./install.sh
-
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_DIR"
 
 echo "==> Project directory: $PROJECT_DIR"
 
-# --- 1. Check/install Python ---
+# Check/install Python
+
 if ! command -v python3 &> /dev/null; then
     echo "==> python3 is not installed. Installing it with apt (you'll be asked for your password)..."
     sudo apt update
@@ -24,7 +19,8 @@ if ! command -v python3 &> /dev/null; then
     fi
 fi
 
-# --- 2. Check/install other system dependencies ---
+# Check/install other system dependencies
+
 MISSING=""
 
 python3 -c "import tkinter" 2>/dev/null || MISSING="$MISSING python3-tk"
@@ -40,7 +36,8 @@ else
     echo "==> All system dependencies are already installed."
 fi
 
-# --- 3. Create the virtual environment if it doesn't exist ---
+# Create the virtual environment if it doesn't exist
+
 if [ ! -d "venv" ]; then
     echo "==> Creating virtual environment..."
     python3 -m venv venv
@@ -48,7 +45,8 @@ else
     echo "==> Virtual environment already exists, reusing it."
 fi
 
-# --- 4. Install Python dependencies inside the venv (skip if already installed) ---
+# Install Python dependencies inside the venv (skip if already installed)
+
 if venv/bin/python -c "import yt_dlp, PyInstaller" 2>/dev/null; then
     echo "==> Python dependencies already installed, skipping."
 else
@@ -58,7 +56,8 @@ else
     venv/bin/pip install pyinstaller --quiet
 fi
 
-# --- 5. Build the executable with PyInstaller ---
+# Build the executable with PyInstaller
+
 echo "==> Building the executable (this may take a minute)..."
 venv/bin/pyinstaller --onefile --windowed --noconfirm app_desktop.py > /tmp/pyinstaller.log 2>&1
 
@@ -72,7 +71,8 @@ chmod +x dist/app_desktop
 EXECUTABLE_PATH="$PROJECT_DIR/dist/app_desktop"
 echo "==> Executable created at: $EXECUTABLE_PATH"
 
-# --- 6. Create the .desktop launcher with the correct absolute path ---
+# Create the .desktop launcher with the correct absolute path
+
 LAUNCHERS_DIR="$HOME/.local/share/applications"
 mkdir -p "$LAUNCHERS_DIR"
 

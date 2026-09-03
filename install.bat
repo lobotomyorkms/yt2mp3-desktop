@@ -1,15 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM install.bat - installs and packages the YouTube to MP3 desktop app on Windows
-REM
-REM Usage: double-click this file, or run it from a terminal:
-REM   install.bat
-
 cd /d "%~dp0"
 echo ==^> Project directory: %cd%
 
-REM --- 1. Check/install Python ---
+REM Check/install Python
+
 where python >nul 2>&1
 if errorlevel 1 (
     echo ==^> Python not found.
@@ -31,7 +27,8 @@ if errorlevel 1 (
     )
 )
 
-REM --- 2. Check/install ffmpeg ---
+REM Check/install ffmpeg
+
 where ffmpeg >nul 2>&1
 if errorlevel 1 (
     echo ==^> ffmpeg not found.
@@ -50,12 +47,13 @@ if errorlevel 1 (
         echo.
         echo ==^> ffmpeg was installed, but this terminal session won't see it until you
         echo     open a new one. MP3 conversion won't work until you restart the terminal
-        echo     ^(or your PC^) before running the app.
+        echo     (or your PC) before running the app.
         echo.
     )
 )
 
-REM --- 3. Create the virtual environment if it doesn't exist ---
+REM Create the virtual environment if it doesn't exist
+
 if not exist venv (
     echo ==^> Creating virtual environment...
     python -m venv venv
@@ -63,18 +61,20 @@ if not exist venv (
     echo ==^> Virtual environment already exists, reusing it.
 )
 
-REM --- 4. Install Python dependencies inside the venv (skip if already installed) ---
+REM Install Python dependencies inside the venv (skip if already installed)
+
 venv\Scripts\python.exe -c "import yt_dlp, PyInstaller" 2>nul
 if errorlevel 1 (
     echo ==^> Installing Python dependencies...
     venv\Scripts\python.exe -m pip install --upgrade pip --quiet
-    venv\Scripts\pip.exe install yt-dlp --quiet
+    venv\Scripts\pip.exe install -r requirements.txt --quiet
     venv\Scripts\pip.exe install pyinstaller --quiet
 ) else (
     echo ==^> Python dependencies already installed, skipping.
 )
 
-REM --- 5. Build the executable with PyInstaller ---
+REM Build the executable with PyInstaller
+
 echo ==^> Building the executable (this may take a minute)...
 venv\Scripts\pyinstaller.exe --onefile --windowed --noconfirm app_desktop.py > pyinstaller_log.txt 2>&1
 
@@ -86,7 +86,8 @@ if not exist "dist\app_desktop.exe" (
 
 echo ==^> Executable created at: %cd%\dist\app_desktop.exe
 
-REM --- 6. Create a desktop shortcut ---
+REM Create a desktop shortcut
+
 echo ==^> Creating desktop shortcut...
 powershell -NoProfile -Command ^
     "$ws = New-Object -ComObject WScript.Shell;" ^
