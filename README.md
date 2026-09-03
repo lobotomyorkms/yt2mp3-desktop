@@ -35,7 +35,7 @@ It will try to install Python and ffmpeg automatically using
 Run `install.bat` from a terminal to install system dependencies, set up the virtual
 environment, build the executable and add a shortcut to your Desktop, all in one go:
 
-```bat
+```ps1
 ./install.bat
 ```
 
