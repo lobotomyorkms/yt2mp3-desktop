@@ -33,7 +33,11 @@ It will try to install Python and ffmpeg automatically using
 ## Quick install (Windows)
 
 Run `install.bat` from a terminal to install system dependencies, set up the virtual
-environment, build the executable and add a shortcut to your Desktop, all in one go.
+environment, build the executable and add a shortcut to your Desktop, all in one go:
+
+```bat
+./install.bat
+```
 
 It will try to install Python and ffmpeg automatically using
 **winget** if they're missing.
