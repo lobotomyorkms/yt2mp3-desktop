@@ -67,7 +67,7 @@ venv\Scripts\python.exe -c "import yt_dlp, PyInstaller" 2>nul
 if errorlevel 1 (
     echo ==^> Installing Python dependencies...
     venv\Scripts\python.exe -m pip install --upgrade pip --quiet
-    venv\Scripts\pip.exe install -r requirements.txt --quiet
+    venv\Scripts\pip.exe install yt-dlp --quiet
     venv\Scripts\pip.exe install pyinstaller --quiet
 ) else (
     echo ==^> Python dependencies already installed, skipping.
