@@ -3,6 +3,8 @@
 A simple desktop app built with Python and Tkinter that downloads a YouTube
 video and converts it to MP3, using yt-dlp.
 
+## 
+![Example Image](https://github.com/lobotomyorkms/yt2mp3-desktop/blob/main/yt2mp3.png)
 ## Requirements
 
 Installed automatically running the installer (**no action needed**):
