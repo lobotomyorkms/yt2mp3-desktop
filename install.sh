@@ -45,6 +45,16 @@ else
     echo "==> Virtual environment already exists, reusing it."
 fi
 
+if [ ! -x "venv/bin/python" ]; then
+    echo "ERROR: Virtual environment was not created correctly."
+    exit 1
+fi
+
+if ! venv/bin/python -m pip --version &> /dev/null; then
+    echo "ERROR: pip is not available inside the virtual environment."
+    exit 1
+fi
+
 # Install Python dependencies inside the venv (skip if already installed)
 
 if venv/bin/python -c "import yt_dlp, PyInstaller" 2>/dev/null; then
