@@ -6,25 +6,39 @@ echo ==^> Project directory: %cd%
 
 REM Check/install Python
 
+echo ==^> Checking Python...
+
 where python >nul 2>&1
+
 if errorlevel 1 (
     echo ==^> Python not found.
+    
     where winget >nul 2>&1
     if errorlevel 1 (
-        echo ERROR: Python is not installed, and winget is not available to install it automatically.
-        echo Download it manually from https://www.python.org/downloads/
-        echo IMPORTANT: during installation, check "Add python.exe to PATH".
+        echo ERROR: Python is not installed and winget is not available.
+        echo Please install Python manually from:
+        echo https://www.python.org/downloads/
         pause
         exit /b 1
-    ) else (
-        echo ==^> Installing Python via winget...
-        winget install -e --id Python.Python.3.12 --scope user --silent --accept-package-agreements --accept-source-agreements
-        echo.
-        echo ==^> Python was installed. Windows needs a new terminal session to pick up
-        echo     the updated PATH, so please close this window and run install.bat again.
-        pause
-        exit /b 0
     )
+
+    echo ==^> Installing Python via winget...
+
+    winget install -e --id Python.Python.3.12 --scope user --silent --accept-package-agreements --accept-source-agreements
+
+    if errorlevel 1 (
+        echo ERROR: Python installation failed.
+        pause
+        exit /b 1
+    )
+
+    echo.
+    echo ==================================================
+    echo Python has been installed.
+    echo Please close this terminal and run install.bat again.
+    echo ==================================================
+    pause
+    exit /b 0
 )
 
 REM Check/install ffmpeg
