@@ -1,4 +1,4 @@
-# YouTube to MP3 - Desktop App for Windows 10/11 & Linux (Debian/Ubuntu)
+# YouTube to MP3 - Desktop App for Windows 10/11 & Linux (Debian/Ubuntu-based with apt)
 
 A simple desktop app built with Python and Tkinter that downloads a YouTube
 video and converts it to MP3, using yt-dlp.
@@ -89,7 +89,7 @@ The executable will be at `dist/app_desktop` (or `dist\app_desktop.exe` on
 Windows). Note that:
 
 - For best compatibility across Linux distributions, build on the oldest
-  Debian/Ubuntu version you want to support, since newer `glibc` versions
+  Debian/Ubuntu-based version (with apt) you want to support, since newer `glibc` versions
   are backward compatible but not forward compatible.
 
 ### Desktop launcher (Linux)
