@@ -8,7 +8,7 @@ REM Check/install Python
 
 echo ==^> Checking Python...
 
-where python >nul 2>&1
+python --version >nul 2>&1
 
 if errorlevel 1 (
     echo ==^> Python not found.
@@ -16,8 +16,7 @@ if errorlevel 1 (
     where winget >nul 2>&1
     if errorlevel 1 (
         echo ERROR: Python is not installed and winget is not available.
-        echo Please install Python manually from:
-        echo https://www.python.org/downloads/
+        echo Please install Python manually.
         pause
         exit /b 1
     )
@@ -35,11 +34,13 @@ if errorlevel 1 (
     echo.
     echo ==================================================
     echo Python has been installed.
-    echo Please close this terminal and run install.bat again.
+    echo Close this terminal and run install.bat again.
     echo ==================================================
     pause
     exit /b 0
 )
+
+python --version
 
 REM Check/install ffmpeg
 
@@ -70,9 +71,20 @@ REM Create the virtual environment if it doesn't exist
 
 if not exist venv (
     echo ==^> Creating virtual environment...
+    
     python -m venv venv
-) else (
-    echo ==^> Virtual environment already exists, reusing it.
+
+    if errorlevel 1 (
+        echo ERROR: Could not create the virtual environment.
+        pause
+        exit /b 1
+    )
+)
+
+if not exist "venv\Scripts\python.exe" (
+    echo ERROR: Virtual environment was not created correctly.
+    pause
+    exit /b 1
 )
 
 REM Install Python dependencies inside the venv (skip if already installed)
